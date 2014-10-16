@@ -1,0 +1,17 @@
+tell application "iTerm"
+    activate
+
+    try
+        set _session to current session of current terminal
+    on error
+        set _term to (make new terminal)
+        tell _term
+            launch session "Default"
+            set _session to current session
+        end tell
+    end try
+
+    tell _session
+        write text "time sh /Path/To/brewUpdate.sh / 2>&1 | tee -a /Path/To/Desired/Log"
+    end tell
+end tell
